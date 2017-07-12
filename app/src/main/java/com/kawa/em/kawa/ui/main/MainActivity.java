@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         myTimer = new Timer();
         myTimer.schedule(new TimerTask() {
 
+            //TODO: Faire apppli
             @Override
             public void run() {
 
