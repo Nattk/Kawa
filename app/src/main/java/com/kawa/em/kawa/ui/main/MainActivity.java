@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.kawa.em.kawa.R;
+import com.kawa.em.kawa.ui.Home.HomeActivity;
 import com.kawa.em.kawa.ui.map.MapActivity;
 import com.kawa.em.kawa.utils.Constant;
 
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                    Intent intentMap = new Intent(MainActivity.this, MapActivity.class);
-                    startActivity(intentMap);
+                Intent intentHome = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intentHome);
             }
         }, Constant.SPLASH_TIME);
     }
