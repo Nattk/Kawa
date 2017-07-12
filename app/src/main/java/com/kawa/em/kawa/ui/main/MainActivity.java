@@ -1,7 +1,9 @@
-package com.kawa.em.kawa;
+package com.kawa.em.kawa.ui.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.kawa.em.kawa.R;
 
 public class MainActivity extends AppCompatActivity {
 
