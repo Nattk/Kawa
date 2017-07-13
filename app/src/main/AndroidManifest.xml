@@ -42,9 +42,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.map.MapActivity"
+            android:name=".ui.map.MapFragment"
             android:label="@string/title_activity_map" />
-        <activity android:name=".ui.Home.HomeActivity"></activity>
+        <activity android:name=".ui.Home.HomeActivity" />
+        <activity
+            android:name=".ui.Home.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

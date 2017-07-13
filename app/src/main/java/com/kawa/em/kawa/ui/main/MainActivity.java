@@ -1,12 +1,11 @@
 package com.kawa.em.kawa.ui.main;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.ui.Home.HomeActivity;
-import com.kawa.em.kawa.ui.map.MapActivity;
 import com.kawa.em.kawa.utils.Constant;
 
 import java.util.Timer;
