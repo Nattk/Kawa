@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,16 +18,22 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.kawa.em.kawa.R;
+import com.kawa.em.kawa.models.Cafes.Cafe;
 import com.kawa.em.kawa.models.Cafes.Cafes;
+import com.kawa.em.kawa.models.Cafes.Records;
 import com.kawa.em.kawa.ui.ListeCafe.ListFragment;
 import com.kawa.em.kawa.ui.map.MapFragment;
 import com.kawa.em.kawa.utils.Constant;
-import com.kawa.em.kawa.utils.FastDialog;
 import com.kawa.em.kawa.utils.Network;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     private String TAG = "Home";
+    private List<Cafes> cafesList = new ArrayList<>();
+
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -75,7 +82,21 @@ public class HomeActivity extends AppCompatActivity {
                             // Display the first 500 characters of the response string.
                             Log.e(TAG,"onResponse"+response);
                             Gson gson = new Gson();
-                            Cafes cafes =  gson.fromJson(response, Cafes.class);
+                            Records records =  gson.fromJson(response, Records.class);
+
+                            Log.e(TAG,"Records"+records.records);
+
+                           if(records.records != null){
+
+                               cafesList.addAll(records.records);
+
+                            }
+
+                            else{
+                                Log.e(TAG,"onError : Rien dans records");
+
+                            }
+
                         }
                     }, new Response.ErrorListener() {
 
@@ -111,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     return new MapFragment();
                 case 1:
-                    return ListFragment.newInstance("11", "22");
+                    return ListFragment.newInstance(cafesList);
             }
         }
 
