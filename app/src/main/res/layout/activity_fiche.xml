@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kawa.em.kawa.ui.Fiche.FicheActivity">
+
+    <include layout="@layout/action_bar"/>
+
+    <LinearLayout
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/nomCafe"
+            android:text="Nom du Cafe"
+            android:layout_marginBottom="10dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+
+        <TextView
+            android:id="@+id/Adresse"
+            android:text="Adresse"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <TextView
+            android:id="@+id/codePostal"
+            android:text="Code Postal"
+            android:textSize="20dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/PrixComptoire"
+            android:text="Prix Comptoire"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <TextView
+            android:id="@+id/PrixSalle"
+            android:text="Prix Salle"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <TextView
+            android:id="@+id/PrixTerasse"
+            android:text="Prix Terasse"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/Note"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="4/5"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/darker_gray"/>
+
+        <Button
+            android:background="#39b54a"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:text="FAVORIS"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:background="@color/colorAccent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="PARTAGER"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+</LinearLayout>

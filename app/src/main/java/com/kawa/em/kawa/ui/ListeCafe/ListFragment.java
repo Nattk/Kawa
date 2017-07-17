@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kawa.em.kawa.R;
-import com.kawa.em.kawa.models.Cafes.Cafe;
 import com.kawa.em.kawa.models.Cafes.Cafes;
 
 import java.io.Serializable;
