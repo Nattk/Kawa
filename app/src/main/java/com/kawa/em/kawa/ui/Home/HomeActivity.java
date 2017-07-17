@@ -32,7 +32,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     private String TAG = "Home";
-    private List<Cafe> cafesList = new ArrayList<>();
+    private List<Cafes> cafesList = new ArrayList<>();
 
 
     /**
@@ -62,48 +62,42 @@ public class HomeActivity extends AppCompatActivity {
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        if(Network.isNetworkAvailable(HomeActivity.this)){
+        if (Network.isNetworkAvailable(HomeActivity.this)) {
 
             // Instantiate the RequestQueue.
             RequestQueue queue = Volley.newRequestQueue(this);
-            String url = String.format(Constant.URL_BASE);
+            String url = String.format(Constant.URL_ALL);
 
             // Request a string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
-
                         public void onResponse(String response) {
                             // Display the first 500 characters of the response string.
-                            Log.e(TAG,"onResponse"+response);
+                            //Log.e(TAG, "onResponse" + response);
                             Gson gson = new Gson();
-                            Records records =  gson.fromJson(response, Records.class);
+                            Records records = gson.fromJson(response, Records.class);
 
-                            Log.e(TAG,"Records"+records.records);
-
-                           if(records.records != null){
-
-                               Log.e(TAG,"GetRecords :"+ records.getRecords());
-                               cafesList.add(records.records[0].fields);
-
-                            }
-
-                            else{
-                                Log.e(TAG,"onError : Rien dans records");
+                            cafesList.clear();
+                            if (records.records != null) {
+                                cafesList.addAll(records.records);
+                            } else {
+                                //Log.e(TAG, "onError : Rien dans records");
 
                             }
+                            mViewPager.setAdapter(mSectionsPagerAdapter);
+
 
                         }
                     }, new Response.ErrorListener() {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.e(TAG,"onError" + error);
+                    Log.e(TAG, "onError" + error);
                 }
 
             });
@@ -112,7 +106,7 @@ public class HomeActivity extends AppCompatActivity {
 
         } else {
 
-           // FastDialog.showDialog(HomeActivity.this,FastDialog.SIMPLE_DIALOG, getString(R.string.dialog_network_error));
+            // FastDialog.showDialog(HomeActivity.this,FastDialog.SIMPLE_DIALOG, getString(R.string.dialog_network_error));
         }
     }
 
@@ -128,10 +122,9 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 default:
-
-                    return new MapFragment();
+                    return MapFragment.newInstance(cafesList);
                 case 1:
                     return ListFragment.newInstance(cafesList);
             }

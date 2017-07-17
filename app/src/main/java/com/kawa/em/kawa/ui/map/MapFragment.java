@@ -3,6 +3,7 @@ package com.kawa.em.kawa.ui.map;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kawa.em.kawa.R;
+import com.kawa.em.kawa.models.Cafes.Cafes;
+import com.kawa.em.kawa.ui.ListeCafe.ListFragment;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
+
+    private List<Cafes> cafes = new ArrayList<>();
+    private String TAG = "FragmentMap";
+
+    // TODO: Rename and change types of parameters
+    private Serializable mParam1;
 
     private GoogleMap mMap;
     private Fragment map;
@@ -47,12 +60,37 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        // Add a marker in Paris and move the camera
+        mMap = googleMap;
         LatLng paris = new LatLng(48.866667, 2.333333);
-        mMap.addMarker(new MarkerOptions().position(paris).title("Paris"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(paris));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(paris, 11));
+
+        if (getArguments() != null) {
+            mParam1 = getArguments().getSerializable("listCafes");
+
+            cafes = (List<Cafes>) mParam1;
+
+            if (cafes != null) {
+                for (int i = 0; i < cafes.size(); i++) {
+
+                    if (cafes.get(i).fields.geoloc != null) {
+                        LatLng latLng = new LatLng(cafes.get(i).fields.geoloc.get(0), cafes.get(i).fields.geoloc.get(1));
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(cafes.get(i).fields.nom_du_cafe));
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+    public static MapFragment newInstance(List<Cafes> param1) {
+        MapFragment fragment = new MapFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("listCafes", (Serializable) param1);
+        fragment.setArguments(args);
+        return fragment;
     }
 }
