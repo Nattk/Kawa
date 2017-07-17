@@ -2,7 +2,10 @@ package com.kawa.em.kawa.ui.map;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,8 +27,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafes;
+import com.kawa.em.kawa.ui.GPSTracker.GPSTracker;
 import com.kawa.em.kawa.ui.Home.HomeActivity;
 import com.kawa.em.kawa.ui.ListeCafe.ListFragment;
+import com.kawa.em.kawa.utils.Constant;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,14 +38,14 @@ import java.util.List;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    private List<Cafes> cafes = new ArrayList<>();
     private String TAG = "FragmentMap";
 
     // TODO: Rename and change types of parameters
     private Serializable mParam1;
 
-    private GoogleMap mMap;
+    private static GoogleMap mMap;
     private Fragment map;
+    private LatLng oldLatLng;
 
     @Nullable
     @Override
@@ -54,10 +59,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getSerializable("listCafes");
+            mParam1 = getArguments().getSerializable("allCafes");
 
-            cafes = (List<Cafes>) mParam1;
 
+        }
+    }
+
+    public static void notifyData(Context c, List<Cafes> cafes) {
+        if(mMap != null) {
+            getData(c, cafes);
         }
     }
 
@@ -68,6 +78,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.e(TAG, "on resume map");
     }
 
     @Override
@@ -109,30 +126,57 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        
+        GPSTracker gps = new GPSTracker(getContext());
+        if(gps.canGetLocation()) { // gps enabled} // return boolean true/false
+
+        }
 
         mMap = googleMap;
-        LatLng paris = new LatLng(48.866667, 2.333333);
+        LatLng paris = new LatLng(gps.getLatitude(), gps.getLongitude());
         mMap.moveCamera(CameraUpdateFactory.newLatLng(paris));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(paris, 13));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(paris, 14));
 
         setMyLocationEnabled();
 
-        if (cafes != null) {
-            for (int i = 0; i < cafes.size(); i++) {
+        notifyData(getContext(), (List<Cafes>) mParam1);
 
-                if (cafes.get(i).fields.geoloc != null) {
-                    LatLng latLng = new LatLng(cafes.get(i).fields.geoloc.get(0), cafes.get(i).fields.geoloc.get(1));
-                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(cafes.get(i).fields.nom_du_cafe).icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
-                    // Add data object
-                    marker.setTag(cafes.get(i).fields);
 
-                    // Set a listener for marker click.
-                    mMap.setOnMarkerClickListener(this);
+        // Set a listener for marker click.
+        mMap.setOnMarkerClickListener(this);
+
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+
+
+                if(oldLatLng != null) {
+                    float[] results = new float[1];
+                    Location.distanceBetween(oldLatLng.latitude, oldLatLng.longitude,
+                            mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude, results);
+
+
+                    if(results[0] > 1000) {
+                        oldLatLng = mMap.getCameraPosition().target;
+
+                        // sendBroacast
+                        Log.e(TAG, "result: "+results[0]);
+
+                        getContext().sendBroadcast(new Intent(Constant.BROADCAST_LATLNG)
+                                .putExtra(Constant.INTENT_LAT, oldLatLng.latitude)
+                                .putExtra(Constant.INTENT_LNG, oldLatLng.longitude));
+
+                    }
+
+                } else {
+                    oldLatLng = mMap.getCameraPosition().target;
+
                 }
 
+
+
+                //Log.e(TAG, "setOnCameraMoveListener: "+mMap.getCameraPosition().target.latitude+", "+mMap.getCameraPosition().target.longitude);
             }
-        }
+        });
     }
 
     /** Called when the user clicks a marker. */
@@ -146,8 +190,26 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public static MapFragment newInstance(List<Cafes> param1) {
         MapFragment fragment = new MapFragment();
         Bundle args = new Bundle();
-        args.putSerializable("listCafes", (Serializable) param1);
+        args.putSerializable("allCafes", (Serializable) param1);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public static void getData(Context c, List<Cafes> cafes) {
+        mMap.clear();
+
+        if (cafes != null) {
+            for (int i = 0; i < cafes.size(); i++) {
+
+                if (cafes.get(i).fields.geoloc != null) {
+                    LatLng latLng = new LatLng(cafes.get(i).fields.geoloc.get(0), cafes.get(i).fields.geoloc.get(1));
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(cafes.get(i).fields.nom_du_cafe).icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
+                    // Add data object
+                    marker.setTag(cafes.get(i).fields);
+
+                }
+
+            }
+        }
     }
 }
