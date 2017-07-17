@@ -1,5 +1,10 @@
 package com.kawa.em.kawa.ui.Home;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -21,9 +26,11 @@ import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafe;
 import com.kawa.em.kawa.models.Cafes.Cafes;
 import com.kawa.em.kawa.models.Cafes.Records;
+import com.kawa.em.kawa.ui.GPSTracker.GPSTracker;
 import com.kawa.em.kawa.ui.ListeCafe.ListFragment;
 import com.kawa.em.kawa.ui.map.MapFragment;
 import com.kawa.em.kawa.utils.Constant;
+import com.kawa.em.kawa.utils.FastDialog;
 import com.kawa.em.kawa.utils.Network;
 
 import java.util.ArrayList;
@@ -50,11 +57,28 @@ public class HomeActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    private boolean isLocationUpdated;
+
+    private ReceiverLatLng receiverLatLng;
+    private GPSTracker gps;
+
+    private class ReceiverLatLng extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(isLocationUpdated) {
+                getData(intent.getDoubleExtra(Constant.INTENT_LAT, Constant.MAP_DEFAULT_LAT), intent.getDoubleExtra(Constant.INTENT_LNG, Constant.MAP_DEFAULT_LNG));
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // receiver map latlng
+        receiverLatLng = new ReceiverLatLng();
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -62,15 +86,57 @@ public class HomeActivity extends AppCompatActivity {
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        gps = new GPSTracker(HomeActivity.this);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(gps.canGetLocation()) { // gps enabled} // return boolean true/false
+            getData(gps.getLatitude(), gps.getLongitude());
+            isLocationUpdated = true;
+        } else {
+            FastDialog.showDialog(HomeActivity.this, FastDialog.SIMPLE_DIALOG, "Activer le GPS", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO : rediriger vers activation gps
+                    gps.showSettingsAlert();
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+        }
+
+        registerReceiver(receiverLatLng, new IntentFilter(Constant.BROADCAST_LATLNG));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+
+        unregisterReceiver(receiverLatLng);
+    }
+
+    public void getData(double lat, double lon) {
         if (Network.isNetworkAvailable(HomeActivity.this)) {
 
             // Instantiate the RequestQueue.
             RequestQueue queue = Volley.newRequestQueue(this);
-            String url = String.format(Constant.URL_ALL);
+
+            String url = String.format(Constant.URL_LIST, lat, lon, String.valueOf(1000));
+
+            Log.e(TAG, "url: "+url);
 
             // Request a string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -89,7 +155,10 @@ public class HomeActivity extends AppCompatActivity {
                                 //Log.e(TAG, "onError : Rien dans records");
 
                             }
-                            mViewPager.setAdapter(mSectionsPagerAdapter);
+
+                            MapFragment.notifyData(HomeActivity.this, cafesList);
+
+
 
 
                         }

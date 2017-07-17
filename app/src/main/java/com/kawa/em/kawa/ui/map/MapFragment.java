@@ -2,7 +2,6 @@ package com.kawa.em.kawa.ui.map;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,10 +24,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafes;
-import com.kawa.em.kawa.ui.Fiche.FicheActivity;
 import com.kawa.em.kawa.ui.Home.HomeActivity;
 import com.kawa.em.kawa.ui.ListeCafe.ListFragment;
-import com.kawa.em.kawa.ui.main.MainActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
