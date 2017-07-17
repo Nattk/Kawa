@@ -32,7 +32,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     private String TAG = "Home";
-    private List<Cafes> cafesList = new ArrayList<>();
+    private List<Cafe> cafesList = new ArrayList<>();
 
 
     /**
@@ -88,7 +88,8 @@ public class HomeActivity extends AppCompatActivity {
 
                            if(records.records != null){
 
-                               cafesList.addAll(records.records);
+                               Log.e(TAG,"GetRecords :"+ records.getRecords());
+                               cafesList.add(records.records[0].fields);
 
                             }
 
