@@ -159,8 +159,6 @@ public class HomeActivity extends AppCompatActivity {
                             MapFragment.notifyData(HomeActivity.this, cafesList);
 
 
-
-
                         }
                     }, new Response.ErrorListener() {
 
