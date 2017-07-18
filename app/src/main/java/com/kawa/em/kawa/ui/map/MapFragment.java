@@ -155,7 +155,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                             mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude, results);
 
 
-                    if(results[0] > 1000) {
+                    if(results[0] > 800) {
                         oldLatLng = mMap.getCameraPosition().target;
 
                         // sendBroacast
@@ -172,8 +172,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
                 }
 
-
-
                 //Log.e(TAG, "setOnCameraMoveListener: "+mMap.getCameraPosition().target.latitude+", "+mMap.getCameraPosition().target.longitude);
             }
         });
@@ -182,13 +180,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     /** Called when the user clicks a marker. */
     public boolean onMarkerClick(final Marker marker) {
 
-        Log.e(TAG, "onClick : " + marker.getTag());
         Intent intentFiche = new Intent(getContext(), FicheActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("Cafes", (Serializable) marker.getTag());
         intentFiche.putExtras(bundle);
         startActivity(intentFiche);
-
 
         return false;
     }

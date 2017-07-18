@@ -7,4 +7,12 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="button_favoris">FAVORIS</string>
+    <string name="button_partager">PARTAGER</string>
+    <string name="text_view_prix_terasse">Prix Terasse</string>
+    <string name="text_view_prix_salle">Prix Salle</string>
+    <string name="text_view_prix_comptoire">Prix Comptoire</string>
+    <string name="text_view_code_postal">Code Postal</string>
+    <string name="text_view_adresse">Adresse</string>
+    <string name="text_view_nom_du_cafe">Nom du Cafe</string>
 </resources>

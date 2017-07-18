@@ -17,9 +17,9 @@
 
         <TextView
             android:id="@+id/nomCafe"
-            android:text="Nom du Cafe"
+            android:text="@string/text_view_nom_du_cafe"
             android:layout_marginBottom="10dp"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#000000"
             android:layout_height="wrap_content"
@@ -28,17 +28,17 @@
 
         <TextView
             android:id="@+id/Adresse"
-            android:text="Adresse"
+            android:text="@string/text_view_adresse"
             android:layout_marginBottom="10dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textColor="#000000"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
         <TextView
             android:id="@+id/codePostal"
-            android:text="Code Postal"
-            android:textSize="20dp"
+            android:text="@string/text_view_code_postal"
+            android:textSize="20sp"
             android:layout_marginBottom="5dp"
             android:textColor="#000000"
             android:layout_height="wrap_content"
@@ -53,27 +53,27 @@
 
         <TextView
             android:id="@+id/PrixComptoire"
-            android:text="Prix Comptoire"
+            android:text="@string/text_view_prix_comptoire"
             android:layout_marginBottom="10dp"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="#000000"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
         <TextView
             android:id="@+id/PrixSalle"
-            android:text="Prix Salle"
+            android:text="@string/text_view_prix_salle"
             android:layout_marginBottom="10dp"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="#000000"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
         <TextView
             android:id="@+id/PrixTerasse"
-            android:text="Prix Terasse"
+            android:text="@string/text_view_prix_terasse"
             android:layout_marginBottom="10dp"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="#000000"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
@@ -85,15 +85,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@android:color/darker_gray"/>
-
-        <TextView
-            android:id="@+id/Note"
-            android:textColor="#000000"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:text="4/5"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
 
         <View
             android:layout_width="match_parent"
@@ -107,14 +98,14 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_marginBottom="10dp"
-            android:text="FAVORIS"
+            android:text="@string/button_favoris"
             android:textColor="#FFFFFF"/>
 
         <Button
             android:background="@color/colorAccent"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="PARTAGER"
+            android:text="@string/button_partager"
             android:textColor="#FFFFFF"/>
 
     </LinearLayout>

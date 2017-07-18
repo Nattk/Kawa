@@ -21,9 +21,6 @@ public class FicheActivity extends AppCompatActivity {
     private TextView PrixComptoire;
     private TextView PrixSalle;
     private TextView PrixTerasse;
-    private TextView Note;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +28,6 @@ public class FicheActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fiche);
 
         Cafe cafesData = (Cafe) getIntent().getExtras().get("Cafes");
-        Log.e(TAG, "Cafes : " + cafesData.nom_du_cafe);
 
         imageButtonFavorite = (ImageButton) findViewById(R.id.imageButton_favorite);
         nomCafe = (TextView) findViewById(R.id.nomCafe);
@@ -40,7 +36,6 @@ public class FicheActivity extends AppCompatActivity {
         PrixComptoire = (TextView) findViewById(R.id.PrixComptoire);
         PrixSalle = (TextView) findViewById(R.id.PrixSalle);
         PrixTerasse = (TextView) findViewById(R.id.PrixTerasse);
-        Note = (TextView) findViewById(R.id.Note);
 
         nomCafe.setText(cafesData.nom_du_cafe);
         adresse.setText(cafesData.adresse);

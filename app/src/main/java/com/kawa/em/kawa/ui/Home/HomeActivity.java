@@ -134,9 +134,7 @@ public class HomeActivity extends AppCompatActivity {
             // Instantiate the RequestQueue.
             RequestQueue queue = Volley.newRequestQueue(this);
 
-            String url = String.format(Constant.URL_LIST, lat, lon, String.valueOf(1000));
-
-            Log.e(TAG, "url: "+url);
+            String url = String.format(Constant.URL_LIST, lat, lon, String.valueOf(1500));
 
             // Request a string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
