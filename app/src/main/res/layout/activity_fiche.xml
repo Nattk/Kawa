@@ -94,6 +94,7 @@
             android:textColor="#FFFFFF"/>
 
         <Button
+            android:onClick="sendMail"
             android:background="@color/colorAccent"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

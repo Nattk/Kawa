@@ -18,6 +18,8 @@ import com.kawa.em.kawa.ui.Fiche.FicheActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -60,7 +62,7 @@ public class ListFragment extends Fragment {
     }
 
     public static void notifyData(Context c, List<Cafes> cafesList) {
-        cafes.addAll(cafesList);
+        Collections.copy(cafesList, cafes);
         adapter.notifyDataSetChanged();
     }
 

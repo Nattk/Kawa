@@ -1,9 +1,11 @@
 package com.kawa.em.kawa.ui.Fiche;
 
+import android.content.Intent;
 import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -57,4 +59,14 @@ public class FicheActivity extends AppCompatActivity {
 
     }
 
+    public void sendMail(View view) {
+
+        Intent intentEmail = new Intent(Intent.ACTION_SEND);
+
+        intentEmail.setType("message/rfc822");
+        intentEmail.putExtra(Intent.EXTRA_SUBJECT, "Un café dans paris à 1€ !");
+        intentEmail.putExtra(Intent.EXTRA_TEXT, "Nom du café : "+nomCafe.getText().toString()+" \nAdresse : "+adresse.getText().toString()+" "+codePostal.getText().toString());
+
+        startActivity(Intent.createChooser(intentEmail, "Envoyer un e-mail :"));
+    }
 }
