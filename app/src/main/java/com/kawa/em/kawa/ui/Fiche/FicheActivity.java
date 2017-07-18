@@ -56,7 +56,6 @@ public class FicheActivity extends AppCompatActivity {
         else{
             PrixTerasse.setText("Prix terasse : "+cafesData.prix_terasse+" €");
         }
-
     }
 
     public void sendMail(View view) {

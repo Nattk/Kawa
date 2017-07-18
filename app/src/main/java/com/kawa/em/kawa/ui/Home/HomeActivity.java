@@ -32,9 +32,11 @@ import com.kawa.em.kawa.ui.map.MapFragment;
 import com.kawa.em.kawa.utils.Constant;
 import com.kawa.em.kawa.utils.FastDialog;
 import com.kawa.em.kawa.utils.Network;
+import com.kawa.em.kawa.utils.Preference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -76,6 +78,11 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        if (Preference.getWelcome(HomeActivity.this) == null) {
+            FastDialog.showDialog(HomeActivity.this, FastDialog.SIMPLE_DIALOG, "Bienvenu sur Kawa ! Retrouvez tout les cafés de paris à 1€ !");
+            Preference.setWelcome(HomeActivity.this, "ok");
+        }
 
         // receiver map latlng
         receiverLatLng = new ReceiverLatLng();
