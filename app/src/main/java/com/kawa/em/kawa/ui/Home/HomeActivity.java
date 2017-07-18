@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,6 +29,7 @@ import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafe;
 import com.kawa.em.kawa.models.Cafes.Cafes;
 import com.kawa.em.kawa.models.Cafes.Records;
+import com.kawa.em.kawa.ui.Favoris.FavorisActivity;
 import com.kawa.em.kawa.ui.GPSTracker.GPSTracker;
 import com.kawa.em.kawa.ui.ListeCafe.ListFragment;
 import com.kawa.em.kawa.ui.map.MapFragment;
@@ -43,7 +47,6 @@ public class HomeActivity extends AppCompatActivity {
     private String TAG = "Home";
     private List<Cafes> cafesList = new ArrayList<>();
 
-
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -59,15 +62,21 @@ public class HomeActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    private boolean isLocationUpdated;
+    public boolean isLocationUpdated;
 
     private ReceiverLatLng receiverLatLng;
     private GPSTracker gps;
+
+    public void favorite(View view) {
+        Intent intentFavoris = new Intent(HomeActivity.this, FavorisActivity.class);
+        startActivity(intentFavoris);
+    }
 
     private class ReceiverLatLng extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+
             if(isLocationUpdated) {
                 getData(intent.getDoubleExtra(Constant.INTENT_LAT, Constant.MAP_DEFAULT_LAT), intent.getDoubleExtra(Constant.INTENT_LNG, Constant.MAP_DEFAULT_LNG));
             }
@@ -98,17 +107,20 @@ public class HomeActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        gps = new GPSTracker(HomeActivity.this);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if(gps.canGetLocation()) { // gps enabled} // return boolean true/false
-            getData(gps.getLatitude(), gps.getLongitude());
+        gps = new GPSTracker(HomeActivity.this);
+
+        if(gps.canGetLocation()) {
             isLocationUpdated = true;
+
+            if(gps.getLocation() != null) {
+                getData(gps.getLocation().getLatitude(), gps.getLocation().getLongitude());
+            }
         } else {
             FastDialog.showDialog(HomeActivity.this, FastDialog.SIMPLE_DIALOG, "Activer le GPS", new DialogInterface.OnClickListener() {
                 @Override
@@ -142,6 +154,8 @@ public class HomeActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(this);
 
             String url = String.format(Constant.URL_LIST, lat, lon, String.valueOf(1500));
+
+            Log.e(TAG, "url: "+url);
 
             // Request a string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

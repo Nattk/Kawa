@@ -45,13 +45,12 @@
         <activity
             android:name=".ui.map.MapFragment"
             android:label="@string/title_activity_map" />
-        <activity android:name=".ui.Home.HomeActivity" />
-        <activity
-            android:name=".ui.Home.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.Fiche.FicheActivity" />
-        <activity android:name=".ui.Favoris.FavorisActivity"></activity>
+        <activity android:name=".ui.Home.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Fiche.FicheActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Favoris.FavorisActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

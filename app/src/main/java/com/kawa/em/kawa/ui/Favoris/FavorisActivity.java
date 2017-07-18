@@ -3,6 +3,7 @@ package com.kawa.em.kawa.ui.Favoris;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,4 +39,8 @@ public class FavorisActivity extends AppCompatActivity {
         listViewData.setAdapter(new FavorisAdapter(FavorisActivity.this,
                 R.layout.item_cafe, cafeList));
         }
+
+    public void back(View view) {
+        FavorisActivity.this.finish();
+    }
 }
