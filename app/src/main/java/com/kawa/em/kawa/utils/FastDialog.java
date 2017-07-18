@@ -29,7 +29,7 @@ public class FastDialog {
                     builder.setMessage(message);
                     builder.setCancelable(false);
 
-                   // builder.setPositiveButton(R.string.ok, null);
+                    builder.setPositiveButton(R.string.ok, null);
 
                     builder.create().show();
             }
@@ -52,7 +52,7 @@ public class FastDialog {
 
                     builder.setMessage(message);
 
-                    //builder.setPositiveButton(R.string.ok, callbk);
+                    builder.setPositiveButton(R.string.ok, callbk);
                     builder.setCancelable(false);
 
                     builder.create().show();
@@ -75,8 +75,8 @@ public class FastDialog {
                     AlertDialog.Builder builder = new AlertDialog.Builder(c);
                     builder.setMessage(message);
 
-                    //builder.setPositiveButton(R.string.ok, callbk);
-                    //builder.setNegativeButton(R.string.cancel, callbk2);
+                    builder.setPositiveButton(R.string.ok, callbk);
+                    builder.setNegativeButton(R.string.cancel, callbk2);
                     builder.setCancelable(false);
 
                     builder.create().show();

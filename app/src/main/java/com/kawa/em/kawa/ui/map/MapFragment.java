@@ -39,8 +39,6 @@ import java.util.List;
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private String TAG = "FragmentMap";
-
-    // TODO: Rename and change types of parameters
     private Serializable mParam1;
 
     private static GoogleMap mMap;
@@ -60,8 +58,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         if (getArguments() != null) {
             mParam1 = getArguments().getSerializable("allCafes");
-
-
         }
     }
 
@@ -84,7 +80,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onResume() {
         super.onResume();
 
-        Log.e(TAG, "on resume map");
     }
 
     @Override

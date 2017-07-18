@@ -47,21 +47,20 @@ public class FicheActivity extends AppCompatActivity {
         nomCafe.setText(cafesData.nom_du_cafe);
         adresse.setText(cafesData.adresse);
         codePostal.setText(cafesData.arrondissement);
-        PrixComptoire.setText("Prix comptoir : "+cafesData.prix_comptoir);
+        PrixComptoire.setText("Prix comptoir : "+cafesData.prix_comptoir+" €");
         if( cafesData.prix_salle.indexOf("-") != -1 ){
-            PrixSalle.setText("Ce café dispose d'une salle");
+            PrixSalle.setText("Ce café ne dispose pas de salle");
         }
         else{
-            PrixSalle.setText(cafesData.prix_salle);
+            PrixSalle.setText("Prix salle : "+cafesData.prix_salle+" €");
         }
 
         if( cafesData.prix_terasse.indexOf("-") != -1 ){
-            PrixTerasse.setText("Ce café dispose d'une Terrasse");
+            PrixTerasse.setText("Ce café ne dispose pas de terrasse");
         }
         else{
-            PrixTerasse.setText(cafesData.prix_salle);
+            PrixTerasse.setText("Prix terasse : "+cafesData.prix_terasse+" €");
         }
-
     }
 
     public void addToFavorite(View view) {
@@ -70,5 +69,15 @@ public class FicheActivity extends AppCompatActivity {
         startActivity(intentFiche);
         Preference.addFavorite(FicheActivity.this,cafesData);
 
+    }
+    public void sendMail(View view) {
+
+        Intent intentEmail = new Intent(Intent.ACTION_SEND);
+
+        intentEmail.setType("message/rfc822");
+        intentEmail.putExtra(Intent.EXTRA_SUBJECT, "Un café dans paris à 1€ !");
+        intentEmail.putExtra(Intent.EXTRA_TEXT, "Nom du café : "+nomCafe.getText().toString()+" \nAdresse : "+adresse.getText().toString()+" "+codePostal.getText().toString());
+
+        startActivity(Intent.createChooser(intentEmail, "Envoyer un e-mail :"));
     }
 }

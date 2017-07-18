@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 /**
  * Created by Nattan on 15/07/2017.
  */
@@ -23,6 +27,8 @@ public class Preference {
     private static final  List<Cafe> favoris = new ArrayList<>();
     private static String json = null;
     private static String TAG = "Preference";
+    private static final String PREF_WELCOME = "welcome";
+
 
 
     private static SharedPreferences getPreference(Context context){
@@ -56,6 +62,18 @@ public class Preference {
         List<Cafe> cafePreference = gson.fromJson(getPreference(context).getString("List",null), listType);
 
         return cafePreference;
+    }
+
+
+    public static void setWelcome(Context context, String welcome){
+        getPreference(context)
+                .edit()
+                .putString(PREF_WELCOME, welcome)
+                .commit();
+    }
+
+    public static String getWelcome(Context context){
+        return getPreference(context).getString(PREF_WELCOME, null);
     }
 
 }
