@@ -20,7 +20,6 @@ import java.io.Serializable;
 public class FicheActivity extends AppCompatActivity {
 
     private String TAG = "Home";
-    private ImageButton imageButtonFavorite;
     private TextView nomCafe;
     private TextView adresse;
     private TextView codePostal;
@@ -36,7 +35,6 @@ public class FicheActivity extends AppCompatActivity {
 
         cafesData = (Cafe) getIntent().getExtras().get("Cafes");
 
-        imageButtonFavorite = (ImageButton) findViewById(R.id.imageButton_favorite);
         nomCafe = (TextView) findViewById(R.id.nomCafe);
         adresse = (TextView) findViewById(R.id.Adresse);
         codePostal = (TextView) findViewById(R.id.codePostal);
@@ -79,5 +77,9 @@ public class FicheActivity extends AppCompatActivity {
         intentEmail.putExtra(Intent.EXTRA_TEXT, "Nom du café : "+nomCafe.getText().toString()+" \nAdresse : "+adresse.getText().toString()+" "+codePostal.getText().toString());
 
         startActivity(Intent.createChooser(intentEmail, "Envoyer un e-mail :"));
+    }
+
+    public void back(View view) {
+        FicheActivity.this.finish();
     }
 }

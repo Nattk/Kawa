@@ -44,6 +44,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private static GoogleMap mMap;
     private Fragment map;
     private LatLng oldLatLng;
+    private LatLng latLng;
 
     @Nullable
     @Override
@@ -121,15 +122,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        GPSTracker gps = new GPSTracker(getContext());
-        if(gps.canGetLocation()) { // gps enabled} // return boolean true/false
-
-        }
-
         mMap = googleMap;
-        LatLng paris = new LatLng(gps.getLatitude(), gps.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(paris));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(paris, 14));
+
+        GPSTracker gps = new GPSTracker(getContext());
+
+        latLng = new LatLng(48.8534, 2.3488);
+        if(gps.canGetLocation()) {
+            latLng = new LatLng(gps.getLatitude(), gps.getLongitude());
+        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
 
         setMyLocationEnabled();
 
@@ -143,12 +145,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             @Override
             public void onCameraMove() {
 
-
                 if(oldLatLng != null) {
                     float[] results = new float[1];
                     Location.distanceBetween(oldLatLng.latitude, oldLatLng.longitude,
                             mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude, results);
 
+                    Log.e(TAG, "move");
 
                     if(results[0] > 800) {
                         oldLatLng = mMap.getCameraPosition().target;

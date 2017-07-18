@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.kawa.em.kawa.ui.Home.HomeActivity">
 
-    <include layout="@layout/action_bar"/>
+    <include layout="@layout/action_bar_home"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"

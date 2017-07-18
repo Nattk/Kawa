@@ -14,12 +14,15 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.kawa.em.kawa.utils.Constant;
+
 /**
  * Created by Armand on 17/07/2017.
  */
 
 public class GPSTracker extends Service implements LocationListener {
 
+    private static final String TAG = "Service GPS";
     private final Context mContext;
 
     // flag for GPS status
@@ -185,6 +188,11 @@ public class GPSTracker extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.e(TAG, "onLocationChanged "+location.getLatitude()+", "+location.getLongitude());
+
+        mContext.sendBroadcast(new Intent(Constant.BROADCAST_LATLNG)
+                .putExtra(Constant.INTENT_LAT, location.getLatitude())
+                .putExtra(Constant.INTENT_LNG, location.getLongitude()));
     }
 
     @Override
