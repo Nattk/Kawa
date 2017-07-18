@@ -82,4 +82,11 @@ public class FicheActivity extends AppCompatActivity {
     public void back(View view) {
         FicheActivity.this.finish();
     }
+
+    public void favorite(View view) {
+        Intent intentFavoris = new Intent(FicheActivity.this, FavorisActivity.class);
+        startActivity(intentFavoris);
+
+
+    }
 }

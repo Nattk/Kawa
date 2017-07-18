@@ -70,6 +70,8 @@ public class HomeActivity extends AppCompatActivity {
     public void favorite(View view) {
         Intent intentFavoris = new Intent(HomeActivity.this, FavorisActivity.class);
         startActivity(intentFavoris);
+
+
     }
 
     private class ReceiverLatLng extends BroadcastReceiver {

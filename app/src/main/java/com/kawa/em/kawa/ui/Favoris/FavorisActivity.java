@@ -1,5 +1,6 @@
 package com.kawa.em.kawa.ui.Favoris;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,5 +43,9 @@ public class FavorisActivity extends AppCompatActivity {
 
     public void back(View view) {
         FavorisActivity.this.finish();
+    }
+
+    public void favorite(View view) {
+       
     }
 }
