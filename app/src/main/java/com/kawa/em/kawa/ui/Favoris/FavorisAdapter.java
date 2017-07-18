@@ -26,13 +26,12 @@ public class FavorisAdapter extends ArrayAdapter<Cafe> {
     private LayoutInflater inflater;
     private int resId; // R.layout.item_restaurant
 
-    public FavorisAdapter(@NonNull Context context, @LayoutRes int resource, List<Cafe> listViewData) {
-        super(context, resource);
+    public FavorisAdapter(@NonNull Context context, @LayoutRes int resource, List<Cafe> objects) {
+        super(context, resource, objects);
 
         resId = resource; // récupération du chemin (int resource) vers R.layout.item_restaurant
         inflater = LayoutInflater.from(context); // init de l'Inflater
     }
-
 
     @NonNull
     @Override

@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kawa.em.kawa.models.Cafes.Cafe;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +25,11 @@ import android.preference.PreferenceManager;
 
 public class Preference {
 
-    private static final  List<Cafe> favoris = new ArrayList<>();
+    private static List<Cafe> favoris = new ArrayList<>();
     private static String json = null;
     private static String TAG = "Preference";
     private static final String PREF_WELCOME = "welcome";
-
+    private static final String PREF_LIST = "list";
 
 
     private static SharedPreferences getPreference(Context context){
@@ -37,17 +38,24 @@ public class Preference {
 
     public static void addFavorite(Context context, Cafe cafe){
 
+        Gson gson = new Gson();
+        Type listTypeCafe = new TypeToken<ArrayList<Cafe>>(){}.getType();
+        favoris = gson.fromJson(getPreference(context).getString(PREF_LIST, null), listTypeCafe);
+        if(favoris == null){
+            favoris = new ArrayList<>();
+        }
+
         favoris.add(cafe);
 
-        Gson gson = new Gson();
         Type listType = new TypeToken<ArrayList<Cafe>>() {}.getType();
         String jsonList = gson.toJson(favoris, listType);
         json = jsonList;
-
+        Log.e(TAG,"JsonString Add : "+json);
         getPreference(context)
                 .edit()
-                .putString("List", jsonList)
+                .putString(PREF_LIST, jsonList)
                 .commit();
+
     }
 
     public void deleteFavorite(int i){
@@ -57,13 +65,8 @@ public class Preference {
 
     public static List<Cafe> getFavorites(Context context){
 
-        Gson gson = new Gson();
-        Type listType = new TypeToken<ArrayList<Cafe>>(){}.getType();
-        List<Cafe> cafePreference = gson.fromJson(getPreference(context).getString("List",null), listType);
-
-        return cafePreference;
+        return favoris;
     }
-
 
     public static void setWelcome(Context context, String welcome){
         getPreference(context)
