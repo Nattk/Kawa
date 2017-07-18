@@ -1,15 +1,21 @@
 package com.kawa.em.kawa.ui.Fiche;
 
+import android.content.Intent;
 import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafe;
 import com.kawa.em.kawa.models.Cafes.Cafes;
+import com.kawa.em.kawa.ui.Favoris.FavorisActivity;
+import com.kawa.em.kawa.utils.Preference;
+
+import java.io.Serializable;
 
 public class FicheActivity extends AppCompatActivity {
 
@@ -21,13 +27,14 @@ public class FicheActivity extends AppCompatActivity {
     private TextView PrixComptoire;
     private TextView PrixSalle;
     private TextView PrixTerasse;
+    private Cafe     cafesData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fiche);
 
-        Cafe cafesData = (Cafe) getIntent().getExtras().get("Cafes");
+        cafesData = (Cafe) getIntent().getExtras().get("Cafes");
 
         imageButtonFavorite = (ImageButton) findViewById(R.id.imageButton_favorite);
         nomCafe = (TextView) findViewById(R.id.nomCafe);
@@ -57,4 +64,11 @@ public class FicheActivity extends AppCompatActivity {
 
     }
 
+    public void addToFavorite(View view) {
+
+        Intent intentFiche = new Intent(FicheActivity.this, FavorisActivity.class);
+        startActivity(intentFiche);
+        Preference.addFavorite(FicheActivity.this,cafesData);
+
+    }
 }

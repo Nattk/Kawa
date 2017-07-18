@@ -94,6 +94,7 @@
             android:background="@android:color/darker_gray"/>
 
         <Button
+            android:onClick="addToFavorite"
             android:background="#39b54a"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

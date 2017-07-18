@@ -50,7 +50,8 @@
             android:name=".ui.Home.Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.Fiche.FicheActivity"></activity>
+        <activity android:name=".ui.Fiche.FicheActivity" />
+        <activity android:name=".ui.Favoris.FavorisActivity"></activity>
     </application>
 
 </manifest>
