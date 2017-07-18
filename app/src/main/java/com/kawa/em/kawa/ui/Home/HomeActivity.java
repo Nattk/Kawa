@@ -155,6 +155,7 @@ public class HomeActivity extends AppCompatActivity {
                             }
 
                             MapFragment.notifyData(HomeActivity.this, cafesList);
+                            ListFragment.notifyData(HomeActivity.this, cafesList);
 
 
                         }
