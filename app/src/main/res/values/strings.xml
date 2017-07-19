@@ -17,4 +17,5 @@
     <string name="text_view_nom_du_cafe">Nom du Cafe</string>
     <string name="ok">OK</string>
     <string name="cancel">ANNULER</string>
+    <string name="text_view_favoris">FAVORIS</string>
 </resources>

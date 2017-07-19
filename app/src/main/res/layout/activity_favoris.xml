@@ -17,19 +17,14 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="Favoris"
-            android:paddingTop="10dp"
+            android:text="@string/text_view_favoris"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:textStyle="bold"
-            android:textSize="25dp"
-            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textColor="#FFF"
+            android:background="#da9072"
             android:textAlignment="center"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/darker_gray"/>
 
         <ListView
             android:id="@+id/listViewData"

@@ -32,6 +32,11 @@ public class FavorisActivity extends AppCompatActivity {
     private List<Cafe> cafeList = new ArrayList<>();
     private String TAG = "Favoris";
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toasty.normal(FavorisActivity.this, "Vous pouvez supprimer vos favoris en prolongant le clique").show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

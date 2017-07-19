@@ -3,24 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/nomCafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Nom du café"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:gravity="right|center_vertical"
+            android:scaleType="fitEnd"
+            android:src="@drawable/icon_marker" />
+
+    </LinearLayout>
 
     <TextView
-        android:padding="5dp"
-        android:id="@+id/nomCafe"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Nom du café"
-        android:textSize="20sp"/>
-
-    <TextView
-        android:padding="5dp"
         android:id="@+id/codePostal"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="code Postal"/>
+        tools:text="Code postal"
+        android:textColor="#999"
+        android:textSize="12sp"/>
 
 </LinearLayout>
