@@ -35,7 +35,7 @@ public class FavorisActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Toasty.normal(FavorisActivity.this, "Vous pouvez supprimer vos favoris en prolongant le clique").show();
+        Toasty.normal(FavorisActivity.this, "Restez appuyé pour supprimer").show();
     }
 
     @Override
