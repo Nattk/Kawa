@@ -33,7 +33,6 @@ public class FavorisActivity extends AppCompatActivity {
     private TextView codePostal;
 
     private List<Cafe> cafeList = new ArrayList<>();
-    private String TAG = "Favoris";
 
     @Override
     protected void onResume() {
@@ -51,8 +50,6 @@ public class FavorisActivity extends AppCompatActivity {
         codePostal = (TextView) findViewById(R.id.codePostal);
         listViewData = (ListView) findViewById(R.id.listViewData);
 
-        Log.e(TAG,"Favoris List "+cafeList);
-
         final FavorisAdapter adapter =  new FavorisAdapter(FavorisActivity.this,R.layout.item_cafe, cafeList);
 
         listViewData.setAdapter(adapter);
@@ -62,12 +59,11 @@ public class FavorisActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Log.e(TAG,"Position : "+i);
                 Preference.deleteFavorite(i,FavorisActivity.this);
                 adapter.notifyDataSetChanged();
                 Toasty.success(FavorisActivity.this, "Suppression effectué", Toast.LENGTH_SHORT, true).show();
 
-                return false;
+                return true;
 
             }
 

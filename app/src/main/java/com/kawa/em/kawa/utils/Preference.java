@@ -4,20 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kawa.em.kawa.models.Cafes.Cafe;
-
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 /**
  * Created by Nattan on 15/07/2017.
@@ -26,8 +18,6 @@ import android.preference.PreferenceManager;
 public class Preference {
 
     private static List<Cafe> favoris = new ArrayList<>();
-    private static String json = null;
-    private static String TAG = "Preference";
     private static final String PREF_WELCOME = "welcome";
     private static final String PREF_LIST = "list";
 
@@ -40,17 +30,12 @@ public class Preference {
 
         setFavorite(context);
         Gson gson = new Gson();
-
-        Log.e(TAG,"Double "+checkDouble(cafe));
-
         if(checkDouble(cafe)==false){
 
             favoris.add(cafe);
 
             Type listType = new TypeToken<ArrayList<Cafe>>() {}.getType();
             String jsonList = gson.toJson(favoris, listType);
-            json = jsonList;
-            Log.e(TAG,"JsonString Add : "+json);
             getPreference(context)
                     .edit()
                     .putString(PREF_LIST, jsonList)
@@ -60,8 +45,6 @@ public class Preference {
         }
 
         else{
-            Log.e(TAG,"Doublons");
-
             return false;
         }
     }
@@ -120,10 +103,7 @@ public class Preference {
 
                else{
                    i=i+1;
-                   Log.e(TAG,"Nom cafe Fav : "+ nomCafe);
-                   Log.e(TAG,"Nom cafe add : "+ cafe.nom_du_cafe);
                    doublon=false;
-
                }
 
            }while(doublon==false && i<favoris.size());

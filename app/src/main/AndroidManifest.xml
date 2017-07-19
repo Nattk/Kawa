@@ -47,9 +47,9 @@
             android:label="@string/title_activity_map" />
         <activity android:name=".ui.Home.HomeActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Fiche.FicheActivity"
+        <activity android:noHistory = "true" android:name=".ui.Fiche.FicheActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Favoris.FavorisActivity"
+        <activity android:noHistory = "true" android:name=".ui.Favoris.FavorisActivity"
             android:screenOrientation="portrait"/>
     </application>
 

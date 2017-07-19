@@ -191,7 +191,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
             });
-// Add the request to the RequestQueue.
+    // Add the request to the RequestQueue.
             queue.add(stringRequest);
 
         } else {
