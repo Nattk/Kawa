@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ import com.kawa.em.kawa.utils.Preference;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.kawa.em.kawa.R.id.parent;
 
 public class FavorisActivity extends AppCompatActivity {
 
@@ -37,9 +40,26 @@ public class FavorisActivity extends AppCompatActivity {
 
         Log.e(TAG,"Favoris List "+cafeList);
 
-        listViewData.setAdapter(new FavorisAdapter(FavorisActivity.this,
-                R.layout.item_cafe, cafeList));
-        }
+        final FavorisAdapter adapter =  new FavorisAdapter(FavorisActivity.this,R.layout.item_cafe, cafeList);
+
+        listViewData.setAdapter(adapter);
+
+        listViewData.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Log.e(TAG,"Position : "+i);
+                Preference.deleteFavorite(i,FavorisActivity.this);
+                adapter.notifyDataSetChanged();
+                return false;
+
+            }
+
+        });
+    }
+
+
 
     public void back(View view) {
         FavorisActivity.this.finish();

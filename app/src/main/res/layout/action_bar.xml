@@ -11,8 +11,7 @@
         android:paddingLeft="15dp"
         android:src="@drawable/arrow_back"
         android:layout_gravity="left|center_vertical"
-        android:background="@android:color/transparent"
-        />
+        android:background="@android:color/transparent"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -29,7 +28,6 @@
         android:paddingRight="10dp"
         android:src="@drawable/icon_star"
         android:layout_gravity="right|center_vertical"
-        android:background="@android:color/transparent"
-        />
+        android:background="@android:color/transparent"/>
 
 </FrameLayout>

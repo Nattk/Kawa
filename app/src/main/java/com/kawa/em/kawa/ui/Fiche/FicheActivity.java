@@ -1,17 +1,14 @@
 package com.kawa.em.kawa.ui.Fiche;
 
 import android.content.Intent;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafe;
-import com.kawa.em.kawa.models.Cafes.Cafes;
 import com.kawa.em.kawa.ui.Favoris.FavorisActivity;
 import com.kawa.em.kawa.utils.Preference;
 
@@ -84,6 +81,7 @@ public class FicheActivity extends AppCompatActivity {
     }
 
     public void favorite(View view) {
+        Preference.setFavorite(FicheActivity.this);
         Intent intentFavoris = new Intent(FicheActivity.this, FavorisActivity.class);
         startActivity(intentFavoris);
 
