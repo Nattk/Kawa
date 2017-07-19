@@ -36,7 +36,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
 
     private String TAG = "FragmentMap";
     private Serializable mParam1;
@@ -140,6 +140,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         // Set a listener for marker click.
         mMap.setOnMarkerClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
 
         mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
@@ -149,8 +150,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     float[] results = new float[1];
                     Location.distanceBetween(oldLatLng.latitude, oldLatLng.longitude,
                             mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude, results);
-
-                    Log.e(TAG, "move");
 
                     if(results[0] > 800) {
                         oldLatLng = mMap.getCameraPosition().target;
@@ -175,7 +174,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     /** Called when the user clicks a marker. */
-    public boolean onMarkerClick(final Marker marker) {
+    public void  onInfoWindowClick(Marker marker) {
 
         Intent intentFiche = new Intent(getContext(), FicheActivity.class);
         Bundle bundle = new Bundle();
@@ -183,7 +182,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         intentFiche.putExtras(bundle);
         startActivity(intentFiche);
 
-        return false;
     }
 
     public static MapFragment newInstance(List<Cafes> param1) {
@@ -202,13 +200,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
                 if (cafes.get(i).fields.geoloc != null) {
                     LatLng latLng = new LatLng(cafes.get(i).fields.geoloc.get(0), cafes.get(i).fields.geoloc.get(1));
-                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(cafes.get(i).fields.nom_du_cafe).icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker)));
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng)
+                            .title(cafes.get(i).fields.nom_du_cafe)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_marker))
+                            .snippet(cafes.get(i).fields.dist + " m"));
                     // Add data object
+
                     marker.setTag(cafes.get(i).fields);
 
                 }
 
             }
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
     }
 }

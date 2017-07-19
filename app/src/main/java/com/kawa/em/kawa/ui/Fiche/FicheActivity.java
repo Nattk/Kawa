@@ -47,14 +47,14 @@ public class FicheActivity extends AppCompatActivity {
         codePostal.setText(cafesData.arrondissement);
         PrixComptoire.setText("Prix comptoir : "+cafesData.prix_comptoir+" €");
         if( cafesData.prix_salle.indexOf("-") != -1 ){
-            PrixSalle.setText("Ce café ne dispose pas de salle");
+            PrixSalle.setText("Ne propose pas de café en salle à 1€");
         }
         else{
             PrixSalle.setText("Prix salle : "+cafesData.prix_salle+" €");
         }
 
         if( cafesData.prix_terasse.indexOf("-") != -1 ){
-            PrixTerasse.setText("Ce café ne dispose pas de terrasse");
+            PrixTerasse.setText("Ne propose pas de café en terasse à 1€");
         }
         else{
             PrixTerasse.setText("Prix terasse : "+cafesData.prix_terasse+" €");

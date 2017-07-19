@@ -16,7 +16,7 @@
         android:onClick="favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="10dp"
+        android:padding="15dp"
         android:src="@drawable/icon_star"
         android:layout_gravity="right|center_vertical"
         android:background="@android:color/transparent"

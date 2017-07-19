@@ -46,6 +46,6 @@ public class FavorisActivity extends AppCompatActivity {
     }
 
     public void favorite(View view) {
-       
+
     }
 }
