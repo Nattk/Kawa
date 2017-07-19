@@ -36,21 +36,34 @@ public class Preference {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static void addFavorite(Context context, Cafe cafe){
+    public static Boolean addFavorite(Context context, Cafe cafe){
 
         setFavorite(context);
         Gson gson = new Gson();
-        favoris.add(cafe);
 
-        Type listType = new TypeToken<ArrayList<Cafe>>() {}.getType();
-        String jsonList = gson.toJson(favoris, listType);
-        json = jsonList;
-        Log.e(TAG,"JsonString Add : "+json);
-        getPreference(context)
-                .edit()
-                .putString(PREF_LIST, jsonList)
-                .commit();
+        Log.e(TAG,"Double "+checkDouble(cafe));
 
+        if(checkDouble(cafe)==false){
+
+            favoris.add(cafe);
+
+            Type listType = new TypeToken<ArrayList<Cafe>>() {}.getType();
+            String jsonList = gson.toJson(favoris, listType);
+            json = jsonList;
+            Log.e(TAG,"JsonString Add : "+json);
+            getPreference(context)
+                    .edit()
+                    .putString(PREF_LIST, jsonList)
+                    .commit();
+
+            return true;
+        }
+
+        else{
+            Log.e(TAG,"Doublons");
+
+            return false;
+        }
     }
 
     public static void setFavorite(Context context){
@@ -88,6 +101,39 @@ public class Preference {
 
     public static String getWelcome(Context context){
         return getPreference(context).getString(PREF_WELCOME, null);
+    }
+
+    private static boolean checkDouble(Cafe cafe){
+       if(favoris.size()>0){
+
+           int i =0;
+           String nomCafe = "";
+           Boolean doublon = false;
+
+           do {
+               nomCafe = favoris.get(i).nom_du_cafe;
+
+               if(nomCafe.equals(cafe.nom_du_cafe)){
+                   doublon = true;
+                   return doublon;
+               }
+
+               else{
+                   i=i+1;
+                   Log.e(TAG,"Nom cafe Fav : "+ nomCafe);
+                   Log.e(TAG,"Nom cafe add : "+ cafe.nom_du_cafe);
+                   doublon=false;
+
+               }
+
+           }while(doublon==false && i<favoris.size());
+
+       }else{
+           return false;
+       }
+
+
+        return false;
     }
 
 }

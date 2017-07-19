@@ -3,20 +3,18 @@ package com.kawa.em.kawa.ui.Fiche;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafe;
 import com.kawa.em.kawa.ui.Favoris.FavorisActivity;
+import com.kawa.em.kawa.utils.FastDialog;
 import com.kawa.em.kawa.utils.Preference;
 
-import java.io.Serializable;
 
 public class FicheActivity extends AppCompatActivity {
 
-    private String TAG = "Home";
     private TextView nomCafe;
     private TextView adresse;
     private TextView codePostal;
@@ -60,10 +58,16 @@ public class FicheActivity extends AppCompatActivity {
 
     public void addToFavorite(View view) {
 
-        Intent intentFiche = new Intent(FicheActivity.this, FavorisActivity.class);
-        startActivity(intentFiche);
-        Preference.addFavorite(FicheActivity.this,cafesData);
+        if(Preference.addFavorite(FicheActivity.this,cafesData)==true){
 
+           Intent intentFiche = new Intent(FicheActivity.this, FavorisActivity.class);
+           startActivity(intentFiche);
+        }
+
+        else{
+
+            FastDialog.showDialog(FicheActivity.this, FastDialog.SIMPLE_DIALOG, "Ce café est déjà dans votre liste de favoris");
+        }
     }
     public void sendMail(View view) {
 
@@ -84,7 +88,6 @@ public class FicheActivity extends AppCompatActivity {
         Preference.setFavorite(FicheActivity.this);
         Intent intentFavoris = new Intent(FicheActivity.this, FavorisActivity.class);
         startActivity(intentFavoris);
-
 
     }
 }
