@@ -21,7 +21,7 @@
             android:layout_marginBottom="10dp"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="#333"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
@@ -29,34 +29,34 @@
         <TextView
             android:id="@+id/Adresse"
             android:text="@string/text_view_adresse"
-            android:layout_marginBottom="10dp"
-            android:textSize="20sp"
-            android:textColor="#000000"
+
+            android:textSize="16sp"
+            android:textColor="#999"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
         <TextView
             android:id="@+id/codePostal"
             android:text="@string/text_view_code_postal"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:layout_marginBottom="5dp"
-            android:textColor="#000000"
+            android:textColor="#999"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="#999"/>
 
         <TextView
             android:id="@+id/PrixComptoire"
             android:text="@string/text_view_prix_comptoire"
             android:layout_marginBottom="10dp"
             android:textSize="15sp"
-            android:textColor="#000000"
+            android:textColor="#333"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
@@ -65,7 +65,7 @@
             android:text="@string/text_view_prix_salle"
             android:layout_marginBottom="10dp"
             android:textSize="15sp"
-            android:textColor="#000000"
+            android:textColor="#333"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
@@ -74,16 +74,15 @@
             android:text="@string/text_view_prix_terasse"
             android:layout_marginBottom="10dp"
             android:textSize="15sp"
-            android:textColor="#000000"
+            android:textColor="#333"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
             android:layout_marginBottom="10dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="#999"/>
 
         <Button
             android:onClick="addToFavorite"
@@ -96,7 +95,7 @@
 
         <Button
             android:onClick="sendMail"
-            android:background="@color/colorAccent"
+            android:background="@color/colorBlue"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="@string/button_partager"
