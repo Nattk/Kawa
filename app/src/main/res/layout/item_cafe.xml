@@ -1,41 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="10dp" >
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/nomCafe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Nom du café"
-            android:textSize="20sp"/>
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:gravity="right|center_vertical"
-            android:scaleType="fitEnd"
-            android:src="@drawable/icon_marker" />
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/ico"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icon_marker"
+        android:padding="15dp"/>
 
     <TextView
-        android:id="@+id/codePostal"
-        android:layout_width="match_parent"
+        android:id="@+id/nomCafe"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Code postal"
+        android:textColor="#333"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/ico"
+        android:layout_alignTop="@+id/ico"
+        tools:text="Nom du cafe"
+        android:textSize="20sp"/>
+
+    <TextView android:id="@+id/codePostal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="#999"
+        android:layout_alignLeft="@+id/nomCafe"
+        android:layout_below="@+id/nomCafe"
+        tools:text="Code postal"
         android:textSize="12sp"/>
 
-</LinearLayout>
+</RelativeLayout>
