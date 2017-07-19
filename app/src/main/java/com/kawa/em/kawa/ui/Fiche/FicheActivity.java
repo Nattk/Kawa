@@ -5,12 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafe;
 import com.kawa.em.kawa.ui.Favoris.FavorisActivity;
 import com.kawa.em.kawa.utils.FastDialog;
 import com.kawa.em.kawa.utils.Preference;
+
+import es.dmoral.toasty.Toasty;
 
 
 public class FicheActivity extends AppCompatActivity {
@@ -62,11 +65,13 @@ public class FicheActivity extends AppCompatActivity {
 
            Intent intentFiche = new Intent(FicheActivity.this, FavorisActivity.class);
            startActivity(intentFiche);
+            Toasty.success(FicheActivity.this, "Le café a bien été ajouté à votre liste de favoris", Toast.LENGTH_SHORT, true).show();
+
         }
 
         else{
+            Toasty.error(FicheActivity.this, "Ce café est déjà dans votre liste de favoris", Toast.LENGTH_SHORT, true).show();
 
-            FastDialog.showDialog(FicheActivity.this, FastDialog.SIMPLE_DIALOG, "Ce café est déjà dans votre liste de favoris");
         }
     }
     public void sendMail(View view) {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafe;
@@ -17,6 +18,8 @@ import com.kawa.em.kawa.utils.Preference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 import static com.kawa.em.kawa.R.id.parent;
 
@@ -54,6 +57,8 @@ public class FavorisActivity extends AppCompatActivity {
                 Log.e(TAG,"Position : "+i);
                 Preference.deleteFavorite(i,FavorisActivity.this);
                 adapter.notifyDataSetChanged();
+                Toasty.success(FavorisActivity.this, "Suppression effectué", Toast.LENGTH_SHORT, true).show();
+
                 return false;
 
             }
