@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import com.kawa.em.kawa.R;
 import com.kawa.em.kawa.models.Cafes.Cafe;
+import com.kawa.em.kawa.ui.Fiche.FicheActivity;
 import com.kawa.em.kawa.utils.Preference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,19 @@ public class FavorisActivity extends AppCompatActivity {
 
             }
 
+        });
+
+        listViewData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intentFiche = new Intent(FavorisActivity.this, FicheActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Cafes", (Serializable) cafeList.get(position));
+                intentFiche.putExtras(bundle);
+                startActivity(intentFiche);
+
+            }
         });
     }
 
