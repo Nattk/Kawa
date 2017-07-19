@@ -88,6 +88,5 @@ public class FicheActivity extends AppCompatActivity {
         Preference.setFavorite(FicheActivity.this);
         Intent intentFavoris = new Intent(FicheActivity.this, FavorisActivity.class);
         startActivity(intentFavoris);
-
     }
 }
