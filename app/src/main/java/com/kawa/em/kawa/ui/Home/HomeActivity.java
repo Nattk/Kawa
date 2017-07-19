@@ -68,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     private GPSTracker gps;
 
     public void favorite(View view) {
+        Preference.setFavorite(HomeActivity.this);
         Intent intentFavoris = new Intent(HomeActivity.this, FavorisActivity.class);
         startActivity(intentFavoris);
 

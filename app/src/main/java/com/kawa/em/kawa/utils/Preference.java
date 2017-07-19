@@ -38,13 +38,8 @@ public class Preference {
 
     public static void addFavorite(Context context, Cafe cafe){
 
+        setFavorite(context);
         Gson gson = new Gson();
-        Type listTypeCafe = new TypeToken<ArrayList<Cafe>>(){}.getType();
-        favoris = gson.fromJson(getPreference(context).getString(PREF_LIST, null), listTypeCafe);
-        if(favoris == null){
-            favoris = new ArrayList<>();
-        }
-
         favoris.add(cafe);
 
         Type listType = new TypeToken<ArrayList<Cafe>>() {}.getType();
@@ -58,9 +53,25 @@ public class Preference {
 
     }
 
-    public void deleteFavorite(int i){
+    public static void setFavorite(Context context){
+        Gson gson = new Gson();
+        Type listTypeCafe = new TypeToken<ArrayList<Cafe>>(){}.getType();
+        favoris = gson.fromJson(getPreference(context).getString(PREF_LIST, null), listTypeCafe);
+        if(favoris == null){
+            favoris = new ArrayList<>();
+        }
+    }
+
+    public static void deleteFavorite(int i,Context context){
 
         favoris.remove(i);
+        Gson gson = new Gson();
+        Type listType = new TypeToken<ArrayList<Cafe>>() {}.getType();
+        String jsonList = gson.toJson(favoris, listType);
+        getPreference(context)
+                .edit()
+                .putString(PREF_LIST, jsonList)
+                .commit();
     }
 
     public static List<Cafe> getFavorites(Context context){
